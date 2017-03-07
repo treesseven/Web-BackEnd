@@ -8,7 +8,7 @@ var app = express();
 
 var getPage = "/getUser";
 var postPage = "/postUser";
-var editPage = "/editUser/:username"
+var editPage = "/editUser/:name"
 var bodyParser = require("body-parser")
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());

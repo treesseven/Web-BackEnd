@@ -10,25 +10,25 @@ app.use(router);
 var post = (req, resp) => {
     data = req.body;
     mongoose.creatDoc("Person",data, (error, docs) => {
-        callback(error, docs, resp)
+        screenPrint(error, docs, resp)
     })
 }
 
 var get = (req, resp) => {
     mongoose.readDoc("Person", (error, docs) => {
-        callback(error, docs, resp)
+        screenPrint(error, docs, resp)
     })
 }
 
 var put = (req, resp) => {
-    conditions = {"name" : req.params.name}
-    data = JSON.parse(req.body)
-    mongoose.updateDoc("Person", condition, data,(error, docs) => {
-        callback(error, docs, resp)
+    conditions = {name : req.params.name}
+    data = req.body
+    mongoose.updateDoc("Person", conditions, data,(error, docs) => {
+        screenPrint(error, docs, resp)
     } )
 }
 
-var callback = (error, data, resp) => {
+var screenPrint = (error, data, resp) => {
     if (error) {
         resp.end(error)
     } else {

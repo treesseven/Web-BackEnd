@@ -17,7 +17,6 @@ var creatDoc = (Collection, jsonData, callback) => {
     let foundCollection = mongoose.model(Collection)
     person = new foundCollection(jsonData);
     person.save().then((document) => {
-        console.log(jsonData)
         callback(null,document)
     }, (error) => {
         callback(error)
@@ -37,11 +36,12 @@ var readDoc = (Collection, callback) => {
 
 var updateDoc = (Collection, conditions, newDoc, callback) => {
     let foundCollection = mongoose.model(Collection);
-    foundCollection.findOneandUpdate(conditions, newDoc, {upsert:true}, (error, doc) => {
+    console.log(conditions)
+    foundCollection.findOneAndUpdate(conditions, newDoc, (error, doc) => {
         if (error) {
             callback(error)
         } else {
-            callback(error, doc)
+            callback(error, "update successfully")
         }
     })
 };
