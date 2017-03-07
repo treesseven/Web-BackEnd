@@ -13,10 +13,12 @@ var personSchema = new mongoose.Schema({
 var Person = mongoose.model("Person", personSchema);
 
 mongoose.connect('mongodb://localhost/test');
-var creatDoc = (Collection, jsonData) => {
-    person = new Collection(jsonData);
+var creatDoc = (Collection, jsonData, callback) => {
+    let foundCollection = mongoose.model(Collection)
+    person = new foundCollection(jsonData);
     person.save().then((document) => {
-        console.log( document)
+        console.log(jsonData)
+        callback(null,document)
     }, (error) => {
         callback(error)
     });

@@ -1,16 +1,17 @@
 /**
  * Created by treesseven on 3/7/2017.
  */
-mongoose = require("./mongoose_node");
+var mongoose = require("./mongoose_node");
 const express = require("express");
-app = express();
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false}));
-app.use(bodyParser.json());
+var app = express();
+var router = express.Router();
+app.use(router);
 
 var post = (req, resp) => {
-    data = JSON.parse(req.body);
-    mongoose.creatDoc("Person", data)
+    data = req.body;
+    mongoose.creatDoc("Person",data, (error, docs) => {
+        callback(error, docs, resp)
+    })
 }
 
 var get = (req, resp) => {
@@ -31,7 +32,7 @@ var callback = (error, data, resp) => {
     if (error) {
         resp.end(error)
     } else {
-        resp.end(data)
+        resp.json(data)
     }
 }
 
